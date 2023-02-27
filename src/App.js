@@ -1,6 +1,19 @@
 function App() {
     return (
         <div className="wrapper clear">
+        <div className="overlay">
+<div className="drawer">
+<h2>Корзина</h2>
+    <div className="cartItem">
+        <img src="/img/sneakers/1.png" alt="Sneakers"/>
+        <div>
+            <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
+            <b>12 999 руб.</b>
+        </div>
+        <img src="/img/button_x.svg" alt="Remove"/>
+    </div>
+</div>
+        </div>
             <header className="d-flex justify-between align-center">
                 <div className='d-flex align-center'>
                     <img width={40} height={40} src='/img/logo.png'/>
