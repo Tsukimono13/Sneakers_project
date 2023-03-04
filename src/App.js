@@ -1,10 +1,11 @@
-import Card from "./components/Card";
+import Card from "./components/card/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 
 const arr = [{name: 'Мужские Кроссовки Nike Blazer Mid Suede', price: "12 999", imageUrl: '/img/sneakers/1.jpg'},
-    {name: 'Кроссовки Puma X Aka Boku Future Rider', price: "8 999", imageUrl: '/img/sneakers/2.jpg'},
-    {name: 'Мужские Кроссовки Nike Air Max 270', price: "11 600", imageUrl: '/img/sneakers/3.jpg'}]
+    {name: 'Мужские Кроссовки Nike Air Max 270', price: "12 999", imageUrl: '/img/sneakers/2.jpg'},
+    {name: 'Кроссовки Puma X Aka Boku Future Rider', price: "8 999", imageUrl: '/img/sneakers/3.jpg'},
+    {name: 'Мужские Кроссовки Nike Blazer Mid Suede', price: "8 499", imageUrl: '/img/sneakers/4.jpg'}]
 
 function App() {
     return (
@@ -21,7 +22,7 @@ function App() {
                 </div>
                 <div className="d-flex">
                     {arr.map((card) => (
-                        <Card title={card.name} price={card.price} imageUrl={card.imageUrl}/>
+                        <Card key={card.id} title={card.name} price={card.price} imageUrl={card.imageUrl} onClickButton={()=>{alert('add')}}/>
                     ))}
                 </div>
             </div>
