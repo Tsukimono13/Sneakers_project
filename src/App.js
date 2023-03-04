@@ -22,7 +22,12 @@ function App() {
                 </div>
                 <div className="d-flex">
                     {arr.map((card) => (
-                        <Card key={card.id} title={card.name} price={card.price} imageUrl={card.imageUrl} onClickButton={()=>{alert('add')}}/>
+                        <Card key={card.id}
+                              title={card.name}
+                              price={card.price}
+                              imageUrl={card.imageUrl}
+                              onClickAddItem={()=>{alert('add')}}
+                              onClickFavorite={()=>{alert('favorite')}}/>
                     ))}
                 </div>
             </div>
