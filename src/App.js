@@ -3,13 +3,20 @@ import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import React from 'react';
 
-const arr = [{name: 'Мужские Кроссовки Nike Blazer Mid Suede', price: "12 999", imageUrl: '/img/sneakers/1.jpg'},
-    {name: 'Мужские Кроссовки Nike Air Max 270', price: "12 999", imageUrl: '/img/sneakers/2.jpg'},
-    {name: 'Кроссовки Puma X Aka Boku Future Rider', price: "8 999", imageUrl: '/img/sneakers/3.jpg'},
-    {name: 'Мужские Кроссовки Nike Blazer Mid Suede', price: "8 499", imageUrl: '/img/sneakers/4.jpg'}]
-
 function App() {
+    const [items, setItems]= React.useState([])
     const [cardOpened, setCardOpened] = React.useState(false)
+
+    React.useEffect(()=>{
+        fetch("https://6404f98640597b65de2e5997.mockapi.io/items")
+            .then((res)=>{
+                return res.json()
+            })
+            .then(json => {
+                setItems(json)
+            })
+    },[])
+
     return (
         <div className="wrapper clear">
             {cardOpened && <Drawer onClose={()=>setCardOpened(false)} />}
@@ -22,8 +29,8 @@ function App() {
                         <input placeholder="Поиск..."/>
                     </div>
                 </div>
-                <div className="d-flex">
-                    {arr.map((card) => (
+                <div className="d-flex flex-wrap">
+                    {items.map((card) => (
                         <Card key={card.id}
                               title={card.name}
                               price={card.price}
