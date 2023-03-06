@@ -5,6 +5,7 @@ import React from 'react';
 
 function App() {
     const [items, setItems]= React.useState([])
+    const [cartItems, setCartItems]= React.useState([])
     const [cardOpened, setCardOpened] = React.useState(false)
 
     React.useEffect(()=>{
@@ -17,9 +18,12 @@ function App() {
             })
     },[])
 
+    const onAddToCart = (obj) => {
+        setCartItems(prev =>[...prev, obj])
+    }
     return (
         <div className="wrapper clear">
-            {cardOpened && <Drawer onClose={()=>setCardOpened(false)} />}
+            {cardOpened && <Drawer onClose={()=>setCardOpened(false)} items={cartItems}/>}
             <Header onClockCart={()=>setCardOpened(true)}/>
             <div className='content p-40'>
                 <div className="d-flex align-center justify-between mb-40">
@@ -35,7 +39,8 @@ function App() {
                               title={card.name}
                               price={card.price}
                               imageUrl={card.imageUrl}
-                              onClickAddItem={()=>{alert('add')}}
+                              onClickAddItem={(obj)=>{
+                                  onAddToCart(obj)}}
                               onClickFavorite={()=>{alert('favorite')}}/>
                     ))}
                 </div>
