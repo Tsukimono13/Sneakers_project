@@ -7,6 +7,7 @@ function App() {
     const [items, setItems]= React.useState([])
     const [cartItems, setCartItems]= React.useState([])
     const [cardOpened, setCardOpened] = React.useState(false)
+    const [searchValue, setSearchValue] = React.useState('')
 
     React.useEffect(()=>{
         fetch("https://6404f98640597b65de2e5997.mockapi.io/items")
@@ -21,21 +22,24 @@ function App() {
     const onAddToCart = (obj) => {
         setCartItems(prev =>[...prev, obj])
     }
+    const onChangeSearchInput = (event) => {
+        setSearchValue(event.target.value)
+    }
     return (
         <div className="wrapper clear">
             {cardOpened && <Drawer onClose={()=>setCardOpened(false)} items={cartItems}/>}
             <Header onClockCart={()=>setCardOpened(true)}/>
             <div className='content p-40'>
                 <div className="d-flex align-center justify-between mb-40">
-                    <h1>Все кроссовки</h1>
+                    <h1>{searchValue ? `Поиск по запросу:"${searchValue}"` : "Все кроссовки"}</h1>
                     <div className="search-block d-flex">
                         <img src='/img/search.svg' alt="Sneakers"/>
-                        <input placeholder="Поиск..."/>
+                        <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..."/>
                     </div>
                 </div>
                 <div className="d-flex flex-wrap">
-                    {items.map((card) => (
-                        <Card key={card.id}
+                    {items.map((card, index) => (
+                        <Card key={index}
                               title={card.name}
                               price={card.price}
                               imageUrl={card.imageUrl}
