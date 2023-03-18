@@ -6,7 +6,7 @@ const Card = ({onClickAddItem, onClickFavorite, id, title, price, imageUrl, favo
     const [isFavorite, setIsFavorite] = React.useState(favorite)
 
     const onClickHandler = () => {
-        onClickAddItem({title, price, imageUrl})
+        onClickAddItem({id, title, price, imageUrl})
         setIsAdded(!isAdded)
     }
 

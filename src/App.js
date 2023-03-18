@@ -1,4 +1,4 @@
-import Card from "./components/card/Card";
+
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import React from 'react';
@@ -13,7 +13,7 @@ function App() {
     const [favorites, setFavorites] = React.useState([])
     const [cardOpened, setCardOpened] = React.useState(false)
     const [searchValue, setSearchValue] = React.useState('')
-
+    console.log(items)
     React.useEffect(() => {
         axios.get("https://6404f98640597b65de2e5997.mockapi.io/items")
             .then((res) => {
@@ -43,11 +43,18 @@ function App() {
 
     }
     const onAddToCart = (obj) => {
-        axios.post("https://6404f98640597b65de2e5997.mockapi.io/cart", obj);
-        setCartItems(prev => [...prev, obj])
+        try{
+            if (cartItems.find((item) => item.id === obj.id)){
+                setCartItems(prev => prev.filter(item => item.id !== obj.id))
+            } else {
+                axios.post("https://6404f98640597b65de2e5997.mockapi.io/cart", obj);
+                setCartItems(prev => [...prev, obj])
+            }
+        } catch (error){
+
+        }
     }
     const onRemoveItem = (id) => {
-        console.log(id)
         axios.delete(`https://6404f98640597b65de2e5997.mockapi.io/cart/${id}`);
         setCartItems((prev) => prev.filter(item => item.id !== id))
     }
@@ -55,7 +62,7 @@ function App() {
     const onChangeSearchInput = (event) => {
         setSearchValue(event.target.value)
     }
-    console.log(items)
+
     return (
         <div className="wrapper clear">
             {cardOpened && <Drawer onClose={() => setCardOpened(false)} items={cartItems} onRemove={onRemoveItem}/>}

@@ -15,7 +15,7 @@ const Home = ({items, searchValue, setSearchValue, onChangeSearchInput, onAddToC
                 </div>
             </div>
             <div className="d-flex flex-wrap">
-                {items.filter((item) => item.name.toLowerCase().includes(searchValue)).map((item, index) => (
+                {items.filter((item) => item.title.toLowerCase().includes(searchValue)).map((item, index) => (
                     <Card key={index}
                           {...item}
                           onClickAddItem={(obj) => {
