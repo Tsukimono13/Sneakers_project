@@ -5,6 +5,7 @@ import axios from "axios";
 import {Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+import Orders from "./pages/Orders";
 
 export const AppContext = React.createContext({})
 
@@ -64,29 +65,32 @@ function App() {
     const onChangeSearchInput = (event) => {
         setSearchValue(event.target.value)
     }
-const isItemAdded = (id) => {
-    return cartItems.some(obj => Number(obj.id) === Number(id))
-}
+    const isItemAdded = (id) => {
+        return cartItems.some(obj => Number(obj.id) === Number(id))
+    }
     return (
-        <AppContext.Provider value={{items, favorites, cartItems, isItemAdded, setCardOpened, setCartItems}}>
-        <div className="wrapper clear">
-            {cardOpened && <Drawer onClose={() => setCardOpened(false)} items={cartItems} onRemove={onRemoveItem}/>}
-            <Header onClockCart={() => setCardOpened(true)}/>
-            <Routes>
-                <Route path={"/"} element={<Home items={items}
-                                                 cartItems={cartItems}
-                                                 searchValue={searchValue}
-                                                 setSearchValue={setSearchValue}
-                                                 onChangeSearchInput={onChangeSearchInput}
-                                                 onAddToCart={onAddToCart}
-                                                 onAddToFavorite={onAddToFavorite}
-                                                 isLoading={isLoading}/>}/>
-                <Route path={"/favorites"}
-                       element={<Favorites onAddToFavorite={onAddToFavorite}/>}/>
-            </Routes>
+        <AppContext.Provider
+            value={{items, favorites, cartItems, onAddToCart, isItemAdded, setCardOpened, setCartItems}}>
+            <div className="wrapper clear">
+                {cardOpened && <Drawer onClose={() => setCardOpened(false)} items={cartItems} onRemove={onRemoveItem}/>}
+                <Header onClockCart={() => setCardOpened(true)}/>
+                <Routes>
+                    <Route path={"/"} element={<Home items={items}
+                                                     cartItems={cartItems}
+                                                     searchValue={searchValue}
+                                                     setSearchValue={setSearchValue}
+                                                     onChangeSearchInput={onChangeSearchInput}
+                                                     onAddToCart={onAddToCart}
+                                                     onAddToFavorite={onAddToFavorite}
+                                                     isLoading={isLoading}/>}/>
+                    <Route path={"/favorites"}
+                           element={<Favorites onAddToFavorite={onAddToFavorite}/>}/>
+                    <Route path={"/orders"}
+                           element={<Orders/>}/>
+                </Routes>
 
 
-        </div>
+            </div>
         </AppContext.Provider>
     );
 }
