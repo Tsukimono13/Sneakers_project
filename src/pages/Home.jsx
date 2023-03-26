@@ -2,22 +2,31 @@ import React from 'react';
 import Card from "../components/card/Card";
 
 
-const Home = ({items, searchValue, setSearchValue, onChangeSearchInput, onAddToCart, onAddToFavorite, cartItems, isLoading}) => {
+const Home = ({
+                  items,
+                  searchValue,
+                  setSearchValue,
+                  onChangeSearchInput,
+                  onAddToCart,
+                  onAddToFavorite,
+                  cartItems,
+                  isLoading
+              }) => {
 
     const renderItems = () => {
         const filteredItems = items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-return (
-    isLoading ? [...Array(12)] : filteredItems)
-    .map((item, index) => (
-        <Card key={index}
-              {...item}
-              loading={isLoading}
-              //added={isItemAdded(item && item.id)}
-              onClickAddItem={(obj) => {
-                  onAddToCart(obj)
-              }}
-              onClickFavorite={onAddToFavorite}/>
-    ))
+        return (
+            isLoading ? [...Array(12)] : filteredItems)
+            .map((item, index) => (
+                <Card key={index}
+                      {...item}
+                      loading={isLoading}
+                    //added={isItemAdded(item && item.id)}
+                      onClickAddItem={(obj) => {
+                          onAddToCart(obj)
+                      }}
+                      onClickFavorite={onAddToFavorite}/>
+            ))
     }
     return (
         <div className='content p-40'>

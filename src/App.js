@@ -116,8 +116,6 @@ function App() {
                     <Route path={"orders"}
                            element={<Orders/>}/>
                 </Routes>
-
-
             </div>
         </AppContext.Provider>
     );

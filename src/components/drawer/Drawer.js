@@ -68,8 +68,9 @@ const Drawer = ({onClose, items = [], onRemove, opened}) => {
                                             <b>{Math.floor(totalPrice / 100 * 5)} руб.</b>
                                         </li>
                                     </ul>
-                                    <button disabled={isLoading} onClick={onClickCompleted} className="greenButton"><img src="img/arrow.svg"
-                                                                                                    alt="Arrow"/>Оформить
+                                    <button disabled={isLoading} onClick={onClickCompleted} className="greenButton"><img
+                                        src="img/arrow.svg"
+                                        alt="Arrow"/>Оформить
                                         заказ
                                     </button>
                                 </div>
