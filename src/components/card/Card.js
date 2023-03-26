@@ -14,14 +14,15 @@ const Card = ({
               }) => {
     const {isItemAdded} = React.useContext(AppContext)
     const [isFavorite, setIsFavorite] = React.useState(favorite)
+    const itemObj = {id, parentId: id, title, price, imageUrl}
 
     const onClickHandler = () => {
-        onClickAddItem({id, title, price, imageUrl})
+        onClickAddItem(itemObj)
 
     }
 
     const onClickFavoriteButton = () => {
-        onClickFavorite({id, title, price, imageUrl})
+        onClickFavorite(itemObj)
         setIsFavorite(!isFavorite)
     }
     return (
@@ -45,7 +46,7 @@ const Card = ({
                         <>
                             {onClickFavorite && (
                                 <div className={styles.favorite} onClick={onClickFavoriteButton}>
-                                    <img src={isFavorite ? '/img/button_like.svg' : '/img/button_unliked.svg'}
+                                    <img src={isFavorite ? 'img/button_like.svg' : 'img/button_unliked.svg'}
                                          alt="Unliked"/>
                                 </div>
                             )}
@@ -59,7 +60,7 @@ const Card = ({
                                 {onClickAddItem && (
                                     <img className={styles.plus}
                                          onClick={onClickHandler}
-                                         src={isItemAdded(id) ? "/img/button_checked.svg" : "/img/add.svg"}
+                                         src={isItemAdded(id) ? "img/button_checked.svg" : "img/add.svg"}
                                          alt="button plus"
                                     />
                                 )}
