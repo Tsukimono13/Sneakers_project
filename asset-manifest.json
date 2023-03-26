@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Tsukimono13/Sneakers_project/static/css/main.6371768f.css",
+    "main.js": "/Tsukimono13/Sneakers_project/static/js/main.f9f28f33.js",
+    "index.html": "/Tsukimono13/Sneakers_project/index.html",
+    "main.6371768f.css.map": "/Tsukimono13/Sneakers_project/static/css/main.6371768f.css.map",
+    "main.f9f28f33.js.map": "/Tsukimono13/Sneakers_project/static/js/main.f9f28f33.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6371768f.css",
+    "static/js/main.f9f28f33.js"
+  ]
+}
