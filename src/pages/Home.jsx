@@ -1,5 +1,7 @@
 import React from 'react';
 import Card from "../components/card/Card";
+import Search from ".//../assets/img/search.svg";
+import X_button from ".//../assets/img/button_x.svg";
 
 
 const Home = ({
@@ -33,9 +35,9 @@ const Home = ({
             <div className="d-flex align-center justify-between mb-40">
                 <h1>{searchValue ? `Поиск по запросу:"${searchValue}"` : "Все кроссовки"}</h1>
                 <div className="search-block d-flex">
-                    <img src='img/search.svg' alt="Sneakers"/>
+                    <img src={Search} alt="Sneakers"/>
                     {searchValue &&
-                        <img onClick={() => setSearchValue('')} className="clear cu-p" src="img/button_x.svg"
+                        <img onClick={() => setSearchValue('')} className="clear cu-p" src={X_button}
                              alt="Remove"/>}
                     <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..."/>
                 </div>

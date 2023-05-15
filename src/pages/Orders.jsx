@@ -1,26 +1,22 @@
 import React from 'react';
 import Card from "../components/card/Card";
-import {AppContext} from "../App";
 import axios from "axios";
 
 
 const Orders = () => {
-    const {onAddToCart, onAddToFavorite} = React.useContext(AppContext)
     const [orders, setOrders] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
 
     React.useEffect(() => {
-        async function fetchDataOrders() {
+        ( async  () => {
             try {
-                const {data} = await axios.get("https://6404f98640597b65de2e5997.mockapi.io/orders")
-                setOrders(data.map((obj) => obj.items))  ///*.flat()*/ add two array
+                const {data} = await axios.get("https://642f12262b883abc641ddda8.mockapi.io/orders")
+                setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []))
                 setIsLoading(false)
             } catch (error) {
                 alert("Ошибка при запросе заказов")
             }
-        }
-
-        fetchDataOrders()
+        })()
     }, [])
     return (
         <div className='content p-40'>

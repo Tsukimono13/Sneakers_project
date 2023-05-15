@@ -1,4 +1,3 @@
-import Header from "./components/Header";
 import Drawer from "./components/drawer/Drawer";
 import React from 'react';
 import axios from "axios";
@@ -6,6 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import Orders from "./pages/Orders";
+import Header from "./components/Header";
 
 export const AppContext = React.createContext({})
 
@@ -22,11 +22,11 @@ function App() {
         async function fetchData() {
             try {
                 const cartResponse = await axios.get("https://6404f98640597b65de2e5997.mockapi.io/cart")
-                //const favoritesResponse = await axios.get("https://6404f98640597b65de2e5997.mockapi.io/favorites")
-                const itemsResponse = await axios.get("https://6404f98640597b65de2e5997.mockapi.io/items")
+                const favoritesResponse = await axios.get("https://64620a1a185dd9877e497318.mockapi.io/favorites")
+                const itemsResponse = await axios.get("https://64620a1a185dd9877e497318.mockapi.io/items")
                 setIsLoading(false)
                 setCartItems(cartResponse.data)
-                //setFavorites(favoritesResponse.data)
+                setFavorites(favoritesResponse.data)
                 setItems(itemsResponse.data)
             } catch (error) {
                 alert('Ошибка при запросе данных :(')
@@ -40,11 +40,13 @@ function App() {
 
     const onAddToFavorite = async (obj) => {
         try {
-            if (favorites.find((favObj) => favObj.id === obj.id)) {
-                axios.delete(`https://6404f98640597b65de2e5997.mockapi.io/favorites`);
+            if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id))) {
+                axios.delete(`https://64620a1a185dd9877e497318.mockapi.io/favorites/${obj.id}`);
+                setFavorites((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
             } else {
-                const {data} = await axios.post(`https://6404f98640597b65de2e5997.mockapi.io/favorites/${obj.id}`, obj);
-                setFavorites(prev => [...prev, data])
+                const {data} = await axios.post(
+                    `https://64620a1a185dd9877e497318.mockapi.io/favorites`, obj);
+                setFavorites((prev) => [...prev, data])
             }
         } catch (error) {
             alert('Не удалось добавть в закладки')

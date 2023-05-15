@@ -1,6 +1,9 @@
 import React from 'react';
 import Info from "../Info";
-
+import X_button from '../../assets/img/button_x.svg'
+import Arrow from '../../assets/img/arrow.svg'
+import Empty from '../../assets/img/emptyCart.svg'
+import IsDone from '../../assets/img/oderIsDone.svg'
 import axios from "axios";
 import {useCart} from "../../hooks/useCart";
 import style from './Drawer.module.scss'
@@ -16,7 +19,7 @@ const Drawer = ({onClose, items = [], onRemove, opened}) => {
     const onClickCompleted = async () => {
         try {
             setIsLoading(true)
-            const {data} = await axios.post("https://6404f98640597b65de2e5997.mockapi.io/orders", {items: cartItems});
+            const {data} = await axios.post("https://642f12262b883abc641ddda8.mockapi.io/orders", {items: cartItems});
             setOrderId(data.id)
             setIsOrderComplete(true)
             setCartItems([])
@@ -35,7 +38,7 @@ const Drawer = ({onClose, items = [], onRemove, opened}) => {
         <div className={`${style.overlay} ${opened ? style.overlayVisible : ''}`}>
             <div className={style.drawer}>
                 <h2 className="mb-30 d-flex justify-between">Корзина
-                    <img onClick={onClose} className="removeBtn cu-p" src="img/button_x.svg" alt="Remove"/>
+                    <img onClick={onClose} className="removeBtn cu-p" src={X_button} alt="Remove"/>
                 </h2>
                 {
                     items.length > 0 ? (
@@ -50,7 +53,7 @@ const Drawer = ({onClose, items = [], onRemove, opened}) => {
                                                 <b>{obj.price} руб.</b>
                                             </div>
                                             <img onClick={() => onRemove(obj.id)} className="removeBtn"
-                                                 src="img/button_x.svg"
+                                                 src={X_button}
                                                  alt="Remove"/>
                                         </div>
                                     ))}
@@ -69,7 +72,7 @@ const Drawer = ({onClose, items = [], onRemove, opened}) => {
                                         </li>
                                     </ul>
                                     <button disabled={isLoading} onClick={onClickCompleted} className="greenButton"><img
-                                        src="img/arrow.svg"
+                                        src={Arrow}
                                         alt="Arrow"/>Оформить
                                         заказ
                                     </button>
@@ -78,7 +81,7 @@ const Drawer = ({onClose, items = [], onRemove, opened}) => {
                         : (
                             <Info title={isOrderComplete ? "Заказ оформлен!" : "Корзина пустая"}
                                   description={isOrderComplete ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
-                                  image={isOrderComplete ? "img/oderIsDone.svg" : "img/emptyCart.svg"}/>
+                                  image={isOrderComplete ? IsDone : Empty}/>
                         )
                 }
             </div>
